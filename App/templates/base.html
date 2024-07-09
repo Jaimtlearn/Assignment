@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {% block title %}
+        {{title}}
+        {% endblock title %}
+    </title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        footer {
+            background-color: #343a40;
+            color: white;
+            text-align: center;
+            padding: 1rem 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <nav class="sticky-top bg-dark navbar navbar-dark navbar-expand-lg">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="ml-auto navbar-nav">
+            <li class="active nav-item">
+              <a class="nav-link" href="{{url_for('home')}}">Home</a>
+            </li>
+            <li class="active nav-item">
+              <a class="ml-4 nav-link" href="{{url_for('contact')}}">Contact Us</a>
+            </li>
+            <li class="active nav-item">
+              <a class="mr-2 ml-4 nav-link" href="{{url_for('get_details')}}">View Details</a>
+            </li>
+          </ul>
+        </div>
+    </nav>
+
+    {% block content %}{% endblock content %}
+
+    <footer>
+        <a href="https://www.linkedin.com/in/jaimit2002" target="_blank" class="mx-2 text-white">LinkedIn</a>
+        <a href="https://github.com/Jaimtlearn" target="_blank" class="mx-2 text-white">GitHub</a>
+        <a href="https://www.instagram.com/jaimit._.2002/" target="_blank" class="mx-2 text-white">Instagram</a>
+    </footer>
+</body>
+</html>
