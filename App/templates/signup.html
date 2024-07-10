@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{title}}
+{% endblock title %}
+
+{% block content %}
+<style>
+    .error {
+        color: red;
+    }
+</style>
+
+<div class="mt-5 container">
+    <h2>Sign Up</h2>
+    <form method="POST" action="{{ url_for('signup') }}">
+        {{ form.hidden_tag() }}
+        <div class="form-group">
+            {{ form.username.label(class="form-label") }}
+            {{ form.username(class="form-control") }}
+            {% for error in form.username.errors %}
+                    <div class="error">{{ error }}</div>
+            {% endfor %}
+        </div>
+        <div class="form-group">
+            {{ form.email.label(class="form-label") }}
+            {{ form.email(class="form-control") }}
+            {% for error in form.email.errors %}
+                    <div class="error">{{ error }}</div>
+            {% endfor %}
+        </div>
+        <div class="form-group">
+            {{ form.password.label(class="form-label") }}
+            {{ form.password(class="form-control") }}
+            {% for error in form.password.errors %}
+                    <div class="error">{{ error }}</div>
+            {% endfor %}
+        </div>
+        <div class="form-group">
+            {{ form.confirm_password.label(class="form-label") }}
+            {{ form.confirm_password(class="form-control") }}
+            {% for error in form.confirm_password.errors %}
+                    <div class="error">{{ error }}</div>
+            {% endfor %}
+        </div>
+        <div class="form-group">
+            {{ form.submit(class="btn btn-primary") }}
+        </div>
+    </form>
+    <p>Already have an account? <a href="{{ url_for('login') }}">Log in</a></p>
+</div>
+{% endblock content %}

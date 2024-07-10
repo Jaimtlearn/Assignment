@@ -10,15 +10,23 @@
     </title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        footer {
-            background-color: #343a40;
-            color: white;
-            text-align: center;
-            padding: 1rem 0;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-        }
+      body, html {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+      }
+      .content {
+        flex: 1;
+      }
+      footer {
+        background-color: #343a40;
+        color: white;
+        text-align: center;
+        padding: 1rem 0;
+        width: 100%;
+      }
     </style>
 </head>
 <body>
@@ -32,17 +40,41 @@
             <li class="active nav-item">
               <a class="nav-link" href="{{url_for('home')}}">Home</a>
             </li>
+            {% if current_user.is_authenticated %}
             <li class="active nav-item">
-              <a class="ml-4 nav-link" href="{{url_for('contact')}}">Contact Us</a>
+              <a class="ml-4 nav-link" href="{{url_for('contact')}}">Log Details</a>
             </li>
             <li class="active nav-item">
-              <a class="mr-2 ml-4 nav-link" href="{{url_for('get_details')}}">View Details</a>
+              <a class="ml-4 nav-link" href="{{url_for('get_details')}}">View Details</a>
             </li>
+            <li class="active nav-item">
+              <a class="mr-2 ml-4 nav-link" href="{{url_for('logout')}}">Logout</a>
+            </li>
+            {% else %}
+            <li class="active nav-item">
+              <a class="ml-4 nav-link" href="{{url_for('login')}}">Login</a>
+            </li>
+            <li class="active nav-item">
+              <a class="mr-2 ml-4 nav-link" href="{{url_for('signup')}}">Signup</a>
+            </li>
+            {% endif %}
           </ul>
         </div>
     </nav>
 
-    {% block content %}{% endblock content %}
+    <div class="container">
+      {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+              {% for category, message in messages %}
+                  <div class="alert alert-{{ category }} mt-3">{{ message }}</div>
+              {% endfor %}
+          {% endif %}
+      {% endwith %}
+  </div>
+
+    <div class="content">
+        {% block content %}{% endblock content %}
+    </div>
 
     <footer>
         <a href="https://www.linkedin.com/in/jaimit2002" target="_blank" class="mx-2 text-white">LinkedIn</a>
